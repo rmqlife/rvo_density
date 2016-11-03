@@ -38,19 +38,8 @@ void draw_Rectangle(int idex_clr,Vector2 position, Color clr)
 	/*draw character*/
 	float s = 0.01;
 	glColor3f(clr.r,clr.g,clr.b); 
-	/*glPushMatrix();
-	glTranslatef((position.x()-10), yOffset, (position.y()+10));
-	glRotatef(270,1,0,0);
-	glScalef(s,s,s);
-	int v_id = idex_clr;
-	string s_vid = to_string((long long)v_id);
-	for (int s = 0;s < s_vid.size();s++){
-		glutStrokeCharacter(GLUT_STROKE_ROMAN,s_vid.c_str()[s]);
-	}
-	glPopMatrix();*/
-
 	/*draw circle*/
-	Circle c ( Vector2(position.x(), position.y()),RadiusOfRobot);
+	Circle c( Vector2(position.x(), position.y()),RadiusOfRobot);
 	vector<pair<Vector2,Vector2>> vL = draw_Circle(c);
 	glLineWidth(1);
 	glBegin(GL_LINES);
@@ -204,17 +193,6 @@ void mouse(int button, int state, int x, int y)
 }
 int main(int argc ,char *argv[])
 {
-	//vector<Vector2> data;
-	//data.push_back(Vector2(1,0));
-	//data.push_back(Vector2(2,0));
-	//data.push_back(Vector2(3,0));
-	//data.push_back(Vector2(5,0));
-	//Vector2 test = Vector2(4,0);
-	//kdTreeGeneral tree;
-	//tree.buildTree(data);
-	//float dst = -1;
-	//Vector2 result = tree.searchNearest(test,dst);
-	//vector<Vector2> results = tree.searchNearestRange(test,2);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(800,600);
 	glutCreateWindow("meco_scale");
@@ -239,30 +217,4 @@ void drawBackGround(IplImage* img){
 	}
 	//*skeleton*/
 	
-}
-void testDijskla(){
-	//vector< vector<int> > initialDst;
-	//vector<int> dst0(9,INT_MAX),dst1(9,INT_MAX),dst2for (size_t c = 0;c < nPts;c++){
-	
-	//			,dst3(9,INT_MAX),dst4(9,INT_MAX),dst5(9,INT_MAX)
-	//			,dst6(9,INT_MAX),dst7(9,INT_MAX),dst8(9,INT_MAX);
-	//dst0[0] = 0;dst0[1] = 4;dst0[7] = 8;
-	//dst1[1] = 0;dst1[0] = 4;dst1[2] = 8;dst1[7] = 11;
-	//dst2[2] = 0;dst2[1] = 8;dst2[3] = 7;dst2[8] = 2;
-	//dst3[3] = 0;dst3[2] = 7;dst3[4] = 9;dst3[5] = 14;
-	//dst4[4] = 0;dst4[3] = 9;dst4[5] = 10;
-	//dst5[5] = 0;dst5[2] = 4;dst5[3] = 14;dst5[4] = 10;dst5[6] = 2;
-	//dst6[6] = 0;dst6[5] = 2;dst6[7] = 1;dst6[8] = 6;
-	//dst7[7] = 0;dst7[0] = 8;dst7[1] = 11;dst7[6] = 1;dst7[8] = 7;
-	//dst8[8] = 0;dst8[2] = 2;dst8[6] = 6;dst8[7] = 7;
-	//initialDst.push_back(dst0);
-	//initialDst.push_back(dst1);
-	//initialDst.push_back(dst2);
-	//initialDst.push_back(dst3);
-	//initialDst.push_back(dst4);
-	//initialDst.push_back(dst5);
-	//initialDst.push_back(dst6);
-	//initialDst.push_back(dst7);
-	//initialDst.push_back(dst8);
-	//vector<size_t> result = dijkstra(initialDst,  0);
 }

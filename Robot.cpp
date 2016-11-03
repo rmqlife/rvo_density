@@ -1,5 +1,11 @@
 #include "stdafx.h"
 #include "Robot.h"
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 #if HAVE_OPENMP || _OPENMP
 #include <omp.h>
@@ -20,39 +26,32 @@ void setupScenario(RVOSimulator* sim)
 	/* Specify the default parameters for agents that are subsequently added. */
 	sim->setAgentDefaults(10, 20, 10, 0.2, RadiusOfRobot, maxSpeedOfAgent,Vector2(0,0));
 	
-	
 	IplImage* img = cvLoadImage( fileName.c_str() );
-	const int clm = 3, row = 2;
-	Vector2 center0(120,200);
-	Vector2 center1(820,200);
-	for (size_t i = 0;i < clm;i++){
-		for (size_t j = 0;j < row;j++){
-			Vector2 start(center0.x() + i*RadiusOfRobot*3,center0.y() + j*RadiusOfRobot*3);
-			Vector2 goal(center1.x() + i*RadiusOfRobot*3,center1.y() + j*RadiusOfRobot*3);
-			/*cvCircle(img, cvPoint(start.x(),start.y()),RadiusOfRobot, cvScalar(0,0,255),2);
-			cvCircle(img, cvPoint(goal.x(),goal.y()),RadiusOfRobot, cvScalar(255,0,0),2);
-			cvShowImage("",img);
-			cvWaitKey(NULL);*/
-			sim->addAgent(start, goal);
-			goals.push_back(goal);//goal 
-			sim->addAgent(goal, start);
-			goals.push_back(start);//goal 
-		}
+	ifstream fin("C:/Users/rmqlife/Documents/GitHub/skeleton_demo/result/agents.txt");
+	int numAgents=0;
+	fin>>numAgents;
+	for (int i=0; i<numAgents; ++i){
+		int startX,startY,goalX,goalY,radius=0;
+		fin>>startY>>startX>>goalY>>goalX>>radius;
+		Vector2 start(startX,startY);
+		Vector2 goal(goalX,goalY);
+		sim->addAgent(start,goal);
+		goals.push_back(goal);
 	}
+	fin.close();
+	// copy the im to show
+	cv::Mat show(img,true);
+	for (size_t i = 0;i < sim->getNumAgents(); i++){
+		Vector2 pos = sim->getAgentPosition(i);
+		Vector2 goal = sim->getAgentGoal(i);
+		cv::circle(show, cv::Point(pos.x(),pos.y()), RadiusOfRobot, cv::Scalar(0,0,255), 2);
+		cv::circle(show, cv::Point(goal.x(),goal.y()), RadiusOfRobot, cv::Scalar(255,0,0), 2);
+	}
+	cv::imshow("show",show);
+	cv::waitKey(0);
 
-	/*for (size_t i = 0;i < 1;i++){
-	Vector2 pos = sim->getAgentPosition(i);
-	cvCircle(img, cvPoint(pos.x(),pos.y()),RadiusOfRobot, cvScalar(0,0,255),2);
-	cvCircle(img, cvPoint(goals[i].x(),goals[i].y()),RadiusOfRobot, cvScalar(255,0,0),2);
-	}*/
-
-	/*cvShowImage("",img);
-	cvWaitKey(NULL);*/
-	
 	sim->setAgentsPathOnSkelton();
 	/*deal with obstacle*/
-	
-	/*IplImage* img = cvLoadImage( fileName.c_str() );*/
 	readObstacle(img);
 	for (int i = 0 ; i < obsts.size();i++){
 		sim->addObstacle(obsts[i].vtx);
@@ -117,8 +116,6 @@ void readObstacle(IplImage* img){
 		obsts.push_back(obst);
 		obst.vtx.clear();
 		vertices.clear();
-		cvShowImage("",img);
-		//cvWaitKey(0);
 	}	
 }
 
