@@ -31,7 +31,7 @@ void setupScenario(RVOSimulator* sim)
 	int numAgents=0;
 	fin>>numAgents;
 	for (int i=0; i<numAgents; ++i){
-		int startX,startY,goalX,goalY,radius=0;
+		float startX,startY,goalX,goalY,radius;
 		fin>>startY>>startX>>goalY>>goalX>>radius;
 		Vector2 start(startX,startY);
 		Vector2 goal(goalX,goalY);
@@ -44,8 +44,8 @@ void setupScenario(RVOSimulator* sim)
 	for (size_t i = 0;i < sim->getNumAgents(); i++){
 		Vector2 pos = sim->getAgentPosition(i);
 		Vector2 goal = sim->getAgentGoal(i);
-		cv::circle(show, cv::Point(pos.x(),pos.y()), RadiusOfRobot, cv::Scalar(0,0,255), 2);
-		cv::circle(show, cv::Point(goal.x(),goal.y()), RadiusOfRobot, cv::Scalar(255,0,0), 2);
+		cv::circle(show, cv::Point(int(pos.x()),int(pos.y())), int(RadiusOfRobot), cv::Scalar(0,0,255), 2);
+		cv::circle(show, cv::Point(int(goal.x()),int(goal.y())), int(RadiusOfRobot), cv::Scalar(255,0,0), 2);
 	}
 	cv::imshow("show",show);
 	cv::waitKey(0);

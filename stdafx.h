@@ -26,12 +26,12 @@ using namespace std;
 /********************************************************/
 const string fileName = "MAPS/1.png";
 const string skeletonFile = "MAPS/skeleton.txt";
-const int num_of_agents = 12;
+const string agentFile = "C:/Users/rmqlife/Documents/GitHub/skeleton_demo/result/agents.txt";
 const float densityThreshold = 0.4;
-
 #define ImageWidth 1237
 #define ImageHeight 358
 const float RadiusOfRobot = 4;
+
 /********************************************************/
 const float PI = 3.14159265;
 const float yOffset = -0.01;

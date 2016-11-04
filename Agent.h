@@ -230,7 +230,6 @@ namespace RVO {
 	 */
 	void linearProgram3(const std::vector<Line> &lines, size_t numObstLines, size_t beginLine,
 						float radius, Vector2 &result);
-	
 }
 
 #endif /* RVO_AGENT_H_ */

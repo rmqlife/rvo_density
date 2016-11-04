@@ -1,9 +1,7 @@
 #include "stdafx.h"
-
 #include "DrawPart.h"
 #include "Robot.h"
 #include "Definitions.h"
-
 #include "ElementMovement.h"
 //the agent initial
 
@@ -18,13 +16,13 @@ struct Color{
 	}
 	float r,g,b;
 };
-GLUquadricObj *quadratic[num_of_agents];
+
 RVOSimulator *sim = new RVOSimulator();//example
 void move();
 void draw_skeleton(){
 	glLineWidth(1);
 	glBegin(GL_LINES);
-	glColor3f(1.0,0.0,0.0);
+	glColor3f(0.0,0.0,1.0);
 	for (size_t i = 0;i < sim->skeleton_.size();i++){
 		Vector2 p0 = sim->skeleton_[i].begin()->position;
 		Vector2 p1 = (sim->skeleton_[i].end()-1)->position;
@@ -150,9 +148,7 @@ void reshape(int w, int h)
 {
 	glViewport(0, 0,(GLsizei)w,(GLsizei)h);
 	glMatrixMode(GL_PROJECTION);
-
 	glLoadIdentity();
-
 	gluPerspective(45,(float)w/h,0.1,3000);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity ();
@@ -178,7 +174,6 @@ void move()
 }
 void mouse(int button, int state, int x, int y)
 {
-
 	switch (button)
 	{
 	case GLUT_LEFT_BUTTON:
@@ -216,5 +211,4 @@ void drawBackGround(IplImage* img){
 		}
 	}
 	//*skeleton*/
-	
 }
