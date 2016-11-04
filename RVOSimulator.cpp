@@ -40,6 +40,10 @@
 #include <omp.h>
 #endif
 
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp> 
+
 namespace RVO {
 	RVOSimulator::RVOSimulator() : defaultAgent_(NULL), globalTime_(0.0f), kdTree_(NULL), timeStep_(0.0f)
 	{
@@ -802,7 +806,6 @@ namespace RVO {
 		
 	}
 	void RVOSimulator::desityEqualization(){
-	
 		vector<Vector2> predictedPoses = predictedPoses_;
 		while(1){
 			vector<float> density;
@@ -901,11 +904,24 @@ namespace RVO {
 				for (size_t i = 0; i < predictedPoses.size(); ++i){
 					cout<<predictedPoses[i].x()<<" "<<predictedPoses[i].y()<<endl;
 				}
-				cout<<density.size()<<endl;
-				for (int i=0; i<density.size(); ++i)
-					cout<<density[i]<<" ";
-				cout<<endl;
 
+			
+			// height , width
+			int width = 500;
+			int bin_width = width/density.size();
+			int bin_height = 400;
+			cv::Mat hist=cv::Mat::zeros(bin_height,width,CV_8UC3);
+			cout<<density.size()<<endl;
+
+			for (int i=0; i<density.size(); ++i){
+				cout<<density[i]<<" ";
+				cv::rectangle(hist,cv::Point(i*bin_width,bin_height),
+					cv::Point((i+1)*bin_width-5,bin_height-bin_height*density[i]),cv::Scalar(255,255,255), -1, 8, 0);
+			}
+			cv::line(hist,cv::Point(0,bin_height*(1-densityThreshold)),
+				cv::Point(width,bin_height*(1-densityThreshold)), cv::Scalar(0,0,255),2,8,0);
+			cout<<endl;
+			imshow("hist",hist);
 		}
 	}
 }

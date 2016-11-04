@@ -1,10 +1,5 @@
 #include "stdafx.h"
 #include "Robot.h"
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <iostream>
-#include <fstream>
 using namespace std;
 
 #if HAVE_OPENMP || _OPENMP
