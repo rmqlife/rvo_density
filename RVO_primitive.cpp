@@ -158,15 +158,10 @@ int click = 0;
 AgentsSequenceMovements movements;
 void move()
 {	
-	
 	if (1==click%2){
 		if(false == reachedGoal(sim)){
-		/*	if(numFrame == 659){
-				int ttt = 0;
-			}*/
 			sim->doStep();
 			predictedPosesOnSkelton = sim->calculateMappingPositionOnSkeleton();
-			
 			numFrame++;
 		}
 	}

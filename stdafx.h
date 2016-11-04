@@ -30,7 +30,7 @@ const string agentFile = "C:/Users/rmqlife/Documents/GitHub/skeleton_demo/result
 const float densityThreshold = 0.4;
 #define ImageWidth 1237
 #define ImageHeight 358
-const float RadiusOfRobot = 4;
+const float RadiusOfRobot = 5;
 
 /********************************************************/
 const float PI = 3.14159265;

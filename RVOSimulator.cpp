@@ -817,15 +817,9 @@ namespace RVO {
 			}
 			if (false == equalization){// no deed to do Equalization
 				return;
-			}
-
-			/*equalization*/
-			IplImage* img = cvLoadImage( fileName.c_str() );
-
-			
+			}			
 			for (size_t i = 0;i < centersID.size();i++){	
 				skeletonPoint center = sltPts_[centersID[i]];
-				
 				/*find the clustered agents around a center */
 				vector<Vector2> clusteredAgentsPredictedPoses;
 				
@@ -899,16 +893,19 @@ namespace RVO {
 					Vector2 moveOffset = agents_[aID]->prefVelocity_ * maxPredictFrame;
 					Vector2 ap = agents_[aID]->position_ + moveOffset;
 					Vector2 newPredictedPos = agents_[aID]->searchNearest(ap,dst);
-					//cvCircle(img, cvPoint(predictedPoses[aID].x(), predictedPoses[aID].y()), RadiusOfRobot,cvScalar(0,0,0),2);
-					
+					//cvCircle(img, cvPoint(predictedPoses[aID].x(), predictedPoses[aID].y()), RadiusOfRobot,cvScalar(0,0,0),2);					
 					predictedPoses[aID] = newPredictedPos;
  				}
 			}
-			for (size_t i = 0;i < predictedPoses.size();i+=2){
-				cout<<predictedPoses[i].x()<<" "<<predictedPoses[i].y()<<" ";
-				cout<<predictedPoses[i+1].x()<<" "<<predictedPoses[i+1].y()<<endl;
-			}
-			cout<<" \n"<<endl;
+			if (false)
+				for (size_t i = 0; i < predictedPoses.size(); ++i){
+					cout<<predictedPoses[i].x()<<" "<<predictedPoses[i].y()<<endl;
+				}
+				cout<<density.size()<<endl;
+				for (int i=0; i<density.size(); ++i)
+					cout<<density[i]<<" ";
+				cout<<endl;
+
 		}
 	}
 }
