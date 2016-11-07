@@ -807,6 +807,7 @@ namespace RVO {
 	}
 	void RVOSimulator::desityEqualization(){
 		vector<Vector2> predictedPoses = predictedPoses_;
+		vector<float> densityShow;
 		while(1){
 			vector<float> density;
 			vector< vector<size_t> > clusteredAgentsIDByMappingPoses;
@@ -819,6 +820,24 @@ namespace RVO {
 				}
 			}
 			if (false == equalization){// no deed to do Equalization
+				if (density.size()>0){
+						// height , width
+						int width = 500;
+						int bin_width = width/density.size();
+						int bin_height = 400;
+						cv::Mat hist=cv::Mat::zeros(bin_height,width,CV_8UC3);
+						cout<<density.size()<<endl;
+
+						for (int i=0; i<density.size(); ++i){
+							cout<<density[i]<<" ";
+							cv::rectangle(hist,cv::Point(i*bin_width,bin_height),
+								cv::Point((i+1)*bin_width-5,bin_height-bin_height*density[i]),cv::Scalar(255,255,255), -1, 8, 0);
+						}
+						cv::line(hist,cv::Point(0,bin_height*(1-densityThreshold)),
+							cv::Point(width,bin_height*(1-densityThreshold)), cv::Scalar(0,0,255),2,8,0);
+						cout<<endl;
+						imshow("hist",hist);
+				}		
 				return;
 			}			
 			for (size_t i = 0;i < centersID.size();i++){	
@@ -906,24 +925,9 @@ namespace RVO {
 				}
 
 			
-			// height , width
-			int width = 500;
-			int bin_width = width/density.size();
-			int bin_height = 400;
-			cv::Mat hist=cv::Mat::zeros(bin_height,width,CV_8UC3);
-			cout<<density.size()<<endl;
-
-			for (int i=0; i<density.size(); ++i){
-				cout<<density[i]<<" ";
-				cv::rectangle(hist,cv::Point(i*bin_width,bin_height),
-					cv::Point((i+1)*bin_width-5,bin_height-bin_height*density[i]),cv::Scalar(255,255,255), -1, 8, 0);
-			}
-			cv::line(hist,cv::Point(0,bin_height*(1-densityThreshold)),
-				cv::Point(width,bin_height*(1-densityThreshold)), cv::Scalar(0,0,255),2,8,0);
-			cout<<endl;
-			imshow("hist",hist);
-		}
+				}
 	}
+
 }
 
 // A utility function to find the vertex with minimum distance value, from
