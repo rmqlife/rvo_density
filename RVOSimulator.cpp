@@ -808,6 +808,12 @@ namespace RVO {
 	void RVOSimulator::desityEqualization(){
 		vector<Vector2> predictedPoses = predictedPoses_;
 		vector<float> densityShow;
+
+		// vector<float> density;
+		// vector< vector<size_t> > clusteredAgentsIDByMappingPoses;
+		// vector<size_t> centersID = clusterMappingPositionsOfAgents(density, predictedPoses, clusteredAgentsIDByMappingPoses);
+
+
 		while(1){
 			vector<float> density;
 			vector< vector<size_t> > clusteredAgentsIDByMappingPoses;
