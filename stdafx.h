@@ -28,12 +28,12 @@
 using namespace std;
 
 /********************************************************/
-const string fileName = "C:/Users/rmqlife/Documents/GitHub/skeleton_demo/data/liang2.png";
+const string fileName = "C:/Users/rmqlife/Documents/GitHub/skeleton_demo/result/map.png";
 const string skeletonFile = "C:/Users/rmqlife/Documents/GitHub/skeleton_demo/result/skeleton.txt";
 const string agentFile = "C:/Users/rmqlife/Documents/GitHub/skeleton_demo/result/agents.txt";
 const float densityThreshold = 0.8;
-#define ImageWidth 1237
-#define ImageHeight 358
+#define ImageWidth 400
+#define ImageHeight 300
 const float RadiusOfRobot = 5;
 
 /********************************************************/

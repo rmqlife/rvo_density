@@ -61,7 +61,7 @@ void draw_robot()
 		clr.g = 0;
 		clr.b = 0;
 		draw_Rectangle(i, position,clr);//agents
-		/*draw mapping position on skeleton*/
+		/*draw mapping position on skeleton
 		if (!predictedPosesOnSkelton.empty()){
 			Vector2 mappingPos = predictedPosesOnSkelton[i];
 			clr.r = 0;
@@ -69,7 +69,7 @@ void draw_robot()
 			clr.b = 0;
 			draw_Rectangle(i, mappingPos,clr);//predicting position
 		}
-		
+		*/
 	}	
 };
 void drawBackGround(IplImage* img);
@@ -114,7 +114,7 @@ void display()
 	glLineWidth(1.2);
 	//_sleep(1);
 	draw_robot();
-	draw_skeleton();
+	//draw_skeleton();
 	
 	/*draw character*/
 	const float s = 0.4;
